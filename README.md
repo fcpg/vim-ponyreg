@@ -31,5 +31,5 @@ Todo
 - Much more checking
 - Substitution, `:global`
 - More non-greedy syntax?
-- `\%`+num eg. `\%23l`
+- `@123<=`
 - POSIX named character classes eg. `[[:space:]]`

@@ -34,9 +34,15 @@ function! ponyreg#Magic(fre) abort
         \ "\\\\\x1c\\1\x1c\\2",
         \ 'g')
     echom "after zs/ze escaping: ".re
+  " %digit expansion
+  let re = substitute(re, 
+        \ s:ue.'%\([<>]\=\)\(\d\+\)\([lcv]\)',
+        \ "%\\1\x1c\\2\x1c\\3",
+        \ 'g')
+    echom "after %digit expansion: ".re
   " alpha escaping
   let re = substitute(re, 
-        \ s:ue.'%\@<![a-zA-Z]',
+        \ s:ue.'%\@<![a-zA-Z_]',
         \ '\\&',
         \ 'g')
     echom "after alpha escaping: ".re
@@ -60,7 +66,7 @@ function! ponyreg#Magic(fre) abort
     echom "after minus expansion: ".re
   " curly expansion
   let re = substitute(re, 
-        \ s:ue.'\d\+\%('.s:ue.',\%('.s:ue.'\d\+\)\=\)\='.
+        \ s:ue.'\d\@<!\d\+\%('.s:ue.',\%('.s:ue.'\d\+\)\=\)\='.
         \ '\|'.s:ue.',\d\+',
         \ '{&}',
         \ 'g')
