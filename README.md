@@ -11,6 +11,8 @@ Everything becomes magic, including letters and numbers.
 
 Ultra-magic patterns are called *ponyregs*.
 
+[![asciicast](https://asciinema.org/a/YUjrDXg5NFZp7v3p97YqYGPDa.png)](https://asciinema.org/a/YUjrDXg5NFZp7v3p97YqYGPDa)
+
 Setup (optional)
 -----------------
 `noremap  <silent>  <Leader>F  :<C-u>call ponyreg#Search()<cr>`
