@@ -6,10 +6,10 @@ Ultra-Magic Regexps
 Wat iz?
 --------
 Vim supports magic, non-magic, very-magic and very-non-magic regexps.
-This plugins provides a fifth mode, "ultra-magic".
+This plugins provides a fifth mode, *ultra-magic*.
 Everything becomes magic, including letters and numbers.
 
-Ultra-magic patterns are called "ponyregs".
+Ultra-magic patterns are called *ponyregs*.
 
 Setup (optional)
 -----------------
@@ -21,7 +21,7 @@ Use the mapping above, or hit `<C-x>/` after entering a ponyreg.
 This works on cmdline and `/` or `?` searches.  
 Hit `<C-x>u` to undo expansion.
 
-*What's "ultra-magic"?*
+**What's "ultra-magic"?**
 - Everything is magic -- punctuation, letters, digits
 - Eg. `w+`, `d*`
 - Strings must be escaped with double quotes eg. `"foobar"`, or each char must be escaped individually eg. `\f\o\o\b\a\r`
@@ -38,7 +38,7 @@ If there are several patterns on the cmdline, eg. `:g/d3s+w/s/"."d/./`, the
 left with the second one (that of `:s`). In that case, you can move cursor on the
 closing pattern `/` char (here, the `/` just after the `d`) and hit `<C-x>/`.
 The expansion will search backward for the opening `/`, and expand what's between.
-No slash cannot appear inside the pattern to expand.
+No slash can appear inside the pattern to expand.
 
 You can define the `g:pony_delim` option to use another single-byte char as a delimiter, instead of `/`.
 
