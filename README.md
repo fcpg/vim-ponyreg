@@ -32,6 +32,8 @@ Hit `<C-x>u` to undo expansion.
 - Minus (`-`) is the non-greedy version of `*`, so `"begin".-"end"` will only match the block with 'foo' in `begin foo end   begin bar end`
 - `zs/ze` are turned into their special meaning.
 - Capture groups can be recalled (inside the pattern) with dollar instead of backslash eg. `$1`, `$2` etc.
+- `**`, `++` and `--` mean `\(.*\)`, `\(.+\)` and `\(.\{-}\)`, so you can match `"func("--")"` to get all func args in `\2`
+- `***`, `+++` and `---` mean `\(\_.*\)`, `\(\_.+\)` and `\(\_.\{-}\)`, so you can match `"begin"---"end"` to get all lines between 'begin' and 'end'
 
 Advanced
 ---------
@@ -58,8 +60,8 @@ Todo
 - Much more checking
 - Commands for ponyreg-friendly `:s` or `:g`?
 - More non-greedy syntax?
-- Support for `@123<=`
-- Support for POSIX named character classes eg. `[[:space:]]`
+- <s>Support for `@123<=`</s>
+- <s>Support for POSIX named character classes eg. `[[:space:]]`</s>
 
 Licence
 --------

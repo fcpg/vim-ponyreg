@@ -9,6 +9,7 @@ let s:ue = '\%(\%(^\|[^\\]\)\\\%(\\\\\)*\)\@<!'.
 " internal escaping char
 let s:esc = "\x1c"
 
+
 "------------
 " Debug {{{1
 "------------
@@ -92,6 +93,12 @@ function! ponyreg#Magic(ponyre) abort
         \ '\="(\V".substitute(submatch(1), "[a-zA-Z0-9]", "'.s:esc.'&", "g")."\v)"',
         \ 'g')
     call <Sid>Debug("after quote expansion: ".re)
+  " posix class escaping
+  let re = substitute(re,
+        \ s:ue.':\(alnum\|alpha\|blank\|cntrl\|digit\|graph\|lower\|print\|punct\|space\|upper\|xdigit\|return\|tab\|escape\|backspace\):',
+        \ '\=":".substitute(submatch(1), "[a-zA-Z0-9]", "'.s:esc.'&", "g").":"',
+        \ 'g')
+    call <Sid>Debug("after posix class escaping: ".re)
   " zs/ze escaping
   let re = substitute(re, 
         \ s:ue.'\(z\)\([se]\)',
@@ -104,7 +111,13 @@ function! ponyreg#Magic(ponyre) abort
         \ '%\1'.s:esc.'\2'.s:esc.'\3',
         \ 'g')
     call <Sid>Debug("after %digit expansion: ".re)
-  " alpha escaping
+  " @digit<[!=] escaping
+  let re = substitute(re, 
+        \ s:ue.'@\(\d\+<[=!]\)',
+        \ '@'.s:esc.'\1',
+        \ 'g')
+    call <Sid>Debug("after @digit<[!=] escaping: ".re)
+  " alpha escaping (to magic)
   let re = substitute(re, 
         \ s:ue.'%\@<![a-zA-Z_]',
         \ '\\&',
@@ -122,6 +135,18 @@ function! ponyreg#Magic(ponyre) abort
         \ '\\'.s:esc.'\1',
         \ 'g')
     call <Sid>Debug("after $digit expansion: ".re)
+  " multi3 expansion
+  let re = substitute(re, 
+        \ s:ue.'\V\(*\|+\|-\)\{3}',
+        \ '(\\_.\1)',
+        \ 'g')
+    call <Sid>Debug("after multi3 expansion: ".re)
+  " multi2 expansion
+  let re = substitute(re, 
+        \ s:ue.'\V\(*\|+\|-\)\{2}',
+        \ '(.\1)',
+        \ 'g')
+    call <Sid>Debug("after multi2 expansion: ".re)
   " minus expansion
   let re = substitute(re, 
         \ s:ue.'-',
